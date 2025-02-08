@@ -1,13 +1,24 @@
 # Dependencies
 node_modules/
+jspm_packages/
 .pnp
 .pnp.js
+bower_components/
 
 # Build outputs
 /lib
 /plugins
 *.vsix
 /dist
+build/
+lib-cov/
+coverage/
+*.lcov
+.nyc_output
+.grunt
+.lock-wscript
+build/Release
+web_modules/
 
 # Environment files
 .env
@@ -19,16 +30,20 @@ node_modules/
 .vscode/
 *.swp
 *.swo
+*.tsbuildinfo
 
 # OS files
 .DS_Store
 Thumbs.db
 
 # Logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
 
 # Python
 __pycache__/
@@ -37,10 +52,17 @@ __pycache__/
 venv/
 .env/
 
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
 # Temporary files
 *.tmp
 *.temp
 *.bak
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Zip files
 *.zip
