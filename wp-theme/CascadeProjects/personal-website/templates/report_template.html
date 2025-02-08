@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Suorituskykyraportti</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .metric-title {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 10px;
+        }
+        
+        .metric-value {
+            font-size: 24px;
+            color: #212529;
+        }
+        
+        .improvement {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .improvement.positive {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .improvement.negative {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .recommendations {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        
+        .recommendation-item {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .recommendation-item:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Suorituskykyraportti ({{ report.report_type.value }})</h1>
+        <p>Aikaväli: {{ report.start_date.strftime('%Y-%m-%d') }} - {{ report.end_date.strftime('%Y-%m-%d') }}</p>
+        <p>Generoitu: {{ report.generated_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    </div>
+    
+    {% for category, metrics in report.metrics.items() %}
+    <div class="section">
+        <h2>{{ category|title }}</h2>
+        
+        {% for metric, value in metrics.items() %}
+        <div class="metric-card">
+            <div class="metric-title">{{ metric|title }}</div>
+            
+            {% if value is mapping %}
+                {% for sub_metric, sub_value in value.items() %}
+                <div class="metric-value">
+                    {{ sub_metric }}: {{ "%.2f"|format(sub_value) }}
+                    
+                    {% if report.improvements.get(category, {}).get(metric, {}).get(sub_metric) %}
+                        {% set improvement = report.improvements[category][metric][sub_metric] %}
+                        <span class="improvement {{ 'positive' if improvement > 0 else 'negative' }}">
+                            {{ '%+.1f%%'|format(improvement * 100) }}
+                        </span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="metric-value">
+                    {{ "%.2f"|format(value) }}
+                    
+                    {% if report.improvements.get(category, {}).get(metric) %}
+                        {% set improvement = report.improvements[category][metric] %}
+                        <span class="improvement {{ 'positive' if improvement > 0 else 'negative' }}">
+                            {{ '%+.1f%%'|format(improvement * 100) }}
+                        </span>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    
+    {% if report.recommendations %}
+    <div class="section">
+        <h2>Suositukset</h2>
+        <div class="recommendations">
+            {% for recommendation in report.recommendations %}
+            <div class="recommendation-item">{{ recommendation }}</div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>

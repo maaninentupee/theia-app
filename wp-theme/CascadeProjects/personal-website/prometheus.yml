@@ -1,0 +1,28 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'cascade_tasks'
+    static_configs:
+      - targets: ['localhost:8000']
+    metrics_path: '/metrics'
+    scheme: 'http'
+    scrape_interval: 5s  # Tiheämpi keräys
+    scrape_timeout: 4s
+
+  - job_name: 'cascade_resources'
+    static_configs:
+      - targets: ['localhost:8001']
+    metrics_path: '/metrics'
+    scheme: 'http'
+    scrape_interval: 30s  # Harvempi keräys
+    scrape_timeout: 25s
+
+  - job_name: 'cascade_alerts'
+    static_configs:
+      - targets: ['localhost:8002']
+    metrics_path: '/metrics'
+    scheme: 'http'
+    scrape_interval: 10s  # Keskitasoinen keräys
+    scrape_timeout: 8s

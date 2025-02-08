@@ -1,0 +1,157 @@
+{
+    "api_keys": {
+        "openai": "${OPENAI_API_KEY}",
+        "huggingface": "${HUGGINGFACE_API_KEY}",
+        "anthropic": "${ANTHROPIC_API_KEY}"
+    },
+    "models": {
+        "gpt_4": {
+            "name": "gpt-4",
+            "max_tokens": 8192,
+            "temperature": 0.7,
+            "max_input_tokens": 6144,
+            "max_output_tokens": 2048,
+            "cost_per_1k_input": 0.03,
+            "cost_per_1k_output": 0.06,
+            "batch_size": 5
+        },
+        "gpt_3_5": {
+            "name": "gpt-3.5-turbo",
+            "max_tokens": 4096,
+            "temperature": 0.7,
+            "max_input_tokens": 3072,
+            "max_output_tokens": 1024,
+            "cost_per_1k_input": 0.002,
+            "cost_per_1k_output": 0.004,
+            "batch_size": 10
+        },
+        "starcoder": {
+            "name": "bigcode/starcoder",
+            "max_tokens": 2048,
+            "temperature": 0.5,
+            "max_input_tokens": 1536,
+            "max_output_tokens": 512,
+            "cost_per_1k_input": 0.001,
+            "cost_per_1k_output": 0.002,
+            "batch_size": 15
+        },
+        "claude": {
+            "name": "claude-2.1",
+            "max_tokens": 100000,
+            "temperature": 0.5,
+            "max_input_tokens": 75000,
+            "max_output_tokens": 25000,
+            "cost_per_1k_input": 0.08,
+            "cost_per_1k_output": 0.24,
+            "batch_size": 3
+        }
+    },
+    "claude_batch": {
+        "api_url": "https://api.anthropic.com/v1/messages",
+        "batch_size": 10,
+        "max_tokens": 1000,
+        "temperature": 0.7,
+        "top_p": 1.0,
+        "timeout": 30,
+        "rate_limit": {
+            "requests_per_minute": 50
+        }
+    },
+    "task_allocation": {
+        "priority_order": [
+            "gpt_4",
+            "starcoder",
+            "claude",
+            "gpt_3_5"
+        ],
+        "fallback_model": "gpt_3_5",
+        "task_types": {
+            "analysis": ["gpt_4", "claude"],
+            "code": ["starcoder", "gpt_4"],
+            "quick": ["gpt_3_5"],
+            "contextual": ["claude", "gpt_4"]
+        },
+        "priority_thresholds": {
+            "gpt_4": 0.7,
+            "claude": 0.8,
+            "starcoder": 0.5,
+            "gpt_3_5": 0.0
+        }
+    },
+    "performance": {
+        "environments": {
+            "darwin": {  
+                "max_threads": 8,
+                "memory_limit_mb": 12288,  
+                "batch_size": 100,
+                "cache_size_mb": 4096,
+                "parallel_batches": 2
+            },
+            "linux": {  
+                "max_threads": 12,
+                "memory_limit_mb": 24576,  
+                "batch_size": 500,
+                "cache_size_mb": 8192,
+                "parallel_batches": 4
+            },
+            "windows": {  
+                "max_threads": 16,
+                "memory_limit_mb": 49152,  
+                "batch_size": 1000,
+                "cache_size_mb": 16384,
+                "parallel_batches": 8
+            }
+        },
+        "cache_enabled": true,
+        "cache_dir": {
+            "darwin": "cache",
+            "linux": "/var/cache/app",
+            "windows": "cache"
+        },
+        "temp_dir": {
+            "darwin": "temp",
+            "linux": "/tmp",
+            "windows": "temp"
+        },
+        "batch_timeout_ms": 500,
+        "max_retries": 3,
+        "retry_delay_ms": 1000
+    },
+    "logging": {
+        "enabled": true,
+        "level": "INFO",
+        "file": {
+            "darwin": "logs/app.log",
+            "linux": "/var/log/app/app.log",
+            "windows": "logs\\app.log"
+        },
+        "max_size_mb": 100,
+        "backup_count": 5,
+        "metrics": {
+            "enabled": true,
+            "interval_ms": 60000,
+            "file": {
+                "darwin": "logs/metrics.json",
+                "linux": "/var/log/app/metrics.json",
+                "windows": "logs\\metrics.json"
+            }
+        }
+    },
+    "paths": {
+        "cache": {
+            "windows": "cache",
+            "linux": "cache",
+            "darwin": "cache"
+        },
+        "temp": {
+            "windows": "temp",
+            "linux": "/tmp",
+            "darwin": "/tmp"
+        },
+        "data": {
+            "windows": "data",
+            "linux": "data",
+            "darwin": "data"
+        }
+    }
+}

@@ -1,0 +1,132 @@
+/*
+Theme Name: Magic Jim's Personal Website
+Theme URI: https://magicjim.com
+Author: Magic Jim
+Author URI: https://magicjim.com
+Description: A beautiful and modern personal website theme for Magic Jim
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: magicjim
+*/
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #35424a;
+}
+section {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #35424a;
+    color: #ffffff;
+}
+
+/* Mobile Menu Styles */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.menu-toggle-icon {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #35424a;
+    position: relative;
+    transition: all 0.3s;
+}
+
+.menu-toggle-icon:before,
+.menu-toggle-icon:after {
+    content: '';
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #35424a;
+    position: absolute;
+    transition: all 0.3s;
+}
+
+.menu-toggle-icon:before {
+    top: -8px;
+}
+
+.menu-toggle-icon:after {
+    bottom: -8px;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon {
+    background-color: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon:before {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon:after {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .main-navigation {
+        display: none;
+    }
+
+    .main-navigation.toggled {
+        display: block;
+    }
+
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-menu li {
+        margin: 10px 0;
+    }
+}

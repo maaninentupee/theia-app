@@ -1,0 +1,32 @@
+{
+    "services": {
+        "anthropic": {
+            "api_key": "YOUR_API_KEY_HERE",
+            "default_model": "claude-3-opus-20240229",
+            "batch_limit": 15,
+            "rate_limits": {
+                "requests_per_minute": 50,
+                "tokens_per_minute": 100000,
+                "batch_cooldown": 1.0,
+                "concurrent_requests": 5
+            }
+        }
+    },
+    "monitoring": {
+        "log_dir": "logs",
+        "db_path": "metrics.db",
+        "max_log_size": 10485760,
+        "backup_count": 5
+    },
+    "cache": {
+        "max_size": 1000,
+        "ttl": 3600,
+        "persist_path": "cache.pkl"
+    },
+    "error_handling": {
+        "max_retries": 3,
+        "initial_delay": 1.0,
+        "max_delay": 60.0,
+        "exponential_base": 2.0
+    }
+}

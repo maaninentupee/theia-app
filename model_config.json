@@ -1,0 +1,36 @@
+{
+    "model_settings": {
+        "model_name": "WizardLM/WizardCoder-Python-7B-V1.0",
+        "context_length": 4096,
+        "generation": {
+            "temperature": 0.7,
+            "top_p": 0.95,
+            "top_k": 50,
+            "repetition_penalty": 1.1,
+            "max_new_tokens": 2048
+        },
+        "optimization": {
+            "quantization": {
+                "cpu": {
+                    "bits": 8,
+                    "group_size": 128,
+                    "scheme": "symmetric"
+                },
+                "gpu": {
+                    "bits": 4,
+                    "group_size": 128,
+                    "scheme": "symmetric"
+                }
+            },
+            "batch_size": {
+                "cpu": 1,
+                "gpu": 4
+            },
+            "memory": {
+                "cpu_max_memory": "8GiB",
+                "gpu_max_memory": "12GiB",
+                "offload_folder": "offload_cache"
+            }
+        }
+    }
+}

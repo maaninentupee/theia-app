@@ -1,0 +1,128 @@
+{
+  "openAIOfficial.models": {
+    "orchestrator": "gpt-4-0125-preview",
+    "command": "gpt-3.5-turbo-0125",
+    "settings": {
+      "gpt-4-0125-preview": {
+        "temperature": 0.7,
+        "maxTokens": 4096,
+        "topP": 0.95,
+        "frequencyPenalty": 0,
+        "presencePenalty": 0
+      },
+      "gpt-3.5-turbo-0125": {
+        "temperature": 0.8,
+        "maxTokens": 4096,
+        "topP": 1,
+        "frequencyPenalty": 0,
+        "presencePenalty": 0
+      }
+    }
+  },
+  
+  "anthropic.models": {
+    "workspace": "claude-3-opus-20240229",
+    "batch": "claude-3-opus-20240229"
+  },
+  
+  "localModels": {
+    "codeCompletion": {
+      "model": "WizardLM/WizardCoder-Python-7B-V1.0",
+      "settings": {
+        "temperature": 0.7,
+        "maxTokens": 2048,
+        "topP": 0.95,
+        "batchSize": 1,
+        "device": "auto",
+        "quantization": "int8"
+      }
+    }
+  },
+
+  "batch.api": {
+    "defaultModel": "claude-3-opus-20240229",
+    "maxConcurrentRequests": 50,
+    "timeout": 300,
+    "retryAttempts": 3,
+    "rateLimits": {
+      "requestsPerMinute": 50,
+      "tokensPerMinute": 100000
+    }
+  },
+
+  "editor": {
+    "language": "fi",
+    "maxContextLines": 200,
+    "formatOnSave": true,
+    "suggestSelection": "first",
+    "snippetSuggestions": "top",
+    "codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.organizeImports": true
+    }
+  },
+
+  "python": {
+    "analysis": {
+      "typeCheckingMode": "basic",
+      "autoImportCompletions": true,
+      "useLibraryCodeForTypes": true,
+      "diagnosticMode": "workspace"
+    },
+    "formatting": {
+      "provider": "black",
+      "blackPath": "./venv/bin/black",
+      "args": ["--line-length", "100"]
+    },
+    "linting": {
+      "enabled": true,
+      "ruffEnabled": true,
+      "ruffPath": "./venv/bin/ruff",
+      "mypyEnabled": true,
+      "mypyPath": "./venv/bin/mypy"
+    }
+  },
+
+  "isort": {
+    "path": ["./venv/bin/isort"],
+    "args": ["--profile", "black"]
+  },
+
+  "files": {
+    "exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/__pycache__": true,
+      "**/.pytest_cache": true,
+      "**/.mypy_cache": true,
+      "**/.ruff_cache": true,
+      "**/node_modules": true,
+      "**/.venv": true,
+      "**/venv": true
+    }
+  },
+
+  "search": {
+    "exclude": {
+      "**/venv": true,
+      "**/.venv": true,
+      "**/node_modules": true,
+      "**/__pycache__": true,
+      "**/.git": true
+    }
+  },
+
+  "excludedPaths": [
+    ".git",
+    "node_modules",
+    ".env",
+    "__pycache__",
+    "*.pyc",
+    "venv",
+    ".venv"
+  ]
+}

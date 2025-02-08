@@ -1,0 +1,5 @@
+timestamp,task_type,model,duration_ms,tokens,cost,success
+2025-01-06T15:47:15.124900,ANALYSIS,gpt-3.5-turbo,507.07,14,0.0210,True
+2025-01-06T15:47:15.125790,QUICK,gpt-3.5-turbo,508.07,8,0.0120,True
+2025-01-06T15:47:15.126466,CODE,bigcode/starcoder,508.42,16,0.0000,True
+2025-01-06T15:47:15.127111,CONTEXTUAL,claude-3-opus-20240229,508.97,18,0.1080,True

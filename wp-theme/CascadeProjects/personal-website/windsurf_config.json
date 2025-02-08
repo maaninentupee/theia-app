@@ -1,0 +1,21 @@
+{
+    "services": {
+        "anthropic": {
+            "api_key": "",
+            "default_model": "claude-3-opus-20240229",
+            "batch_limit": 15
+        }
+    },
+    "editor": {
+        "theme": "dark",
+        "font_size": 14,
+        "tab_size": 4,
+        "auto_save": true
+    },
+    "features": {
+        "code_completion": true,
+        "syntax_highlighting": true,
+        "error_detection": true,
+        "ai_assistance": true
+    }
+}
